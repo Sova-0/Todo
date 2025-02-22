@@ -20,17 +20,6 @@ function TaskList({ todos = [], onDeleted, onToggleActiveCount, onEditTask }) {
     </ul>
   );
 }
-
-// Default props
-TaskList.defaultProps = {
-  todos: [
-    {
-      description: 'Default Task',
-      done: false,
-    },
-  ],
-};
-
 // Prop types
 TaskList.propTypes = {
   todos: PropTypes.arrayOf(
@@ -39,7 +28,7 @@ TaskList.propTypes = {
       description: PropTypes.string,
       done: PropTypes.bool,
     })
-  ),
+  ).isRequired,
   onDeleted: PropTypes.func.isRequired,
   onToggleActiveCount: PropTypes.func.isRequired,
   onEditTask: PropTypes.func.isRequired,
