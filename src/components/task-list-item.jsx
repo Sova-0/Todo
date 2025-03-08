@@ -57,8 +57,8 @@ export default class Task extends React.Component {
       createdAt,
       onDeletedItem,
       id,
-      taimerMinut,
-      taimerSecond,
+      timerMinut,
+      timerSecond,
       onStopTimer,
       onStartTimer,
     } = this.props;
@@ -89,9 +89,19 @@ export default class Task extends React.Component {
                 {description}
               </span>
               <span className="description">
-                <button className="icon icon-play" onClick={onStartTimer}></button>
-                <button className="icon icon-pause" onClick={onStopTimer}></button>
-                {taimerMinut}:{taimerSecond}
+                <button
+                  type="button"
+                  className="icon icon-play"
+                  onClick={onStartTimer}
+                  aria-label="Запустить таймер"
+                />
+                <button
+                  type="button"
+                  className="icon icon-pause"
+                  onClick={onStopTimer}
+                  aria-label="Остановить таймер"
+                />
+                {timerMinut}:{timerSecond}
               </span>
               <span className="created description">
                 {`created ${formatDistanceToNow(createdAt, {
@@ -137,4 +147,8 @@ Task.propTypes = {
   onEditTask: PropTypes.func.isRequired,
   onToggleActiveCount: PropTypes.func.isRequired,
   onDeletedItem: PropTypes.func.isRequired,
+  timerMinut: PropTypes.number.isRequired,
+  timerSecond: PropTypes.number.isRequired,
+  onStopTimer: PropTypes.func.isRequired,
+  onStartTimer: PropTypes.func.isRequired,
 };

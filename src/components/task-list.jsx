@@ -1,7 +1,14 @@
 import PropTypes from 'prop-types';
 import Task from './task-list-item';
 
-function TaskList({ todos = [], onDeleted, onToggleActiveCount, onEditTask, onStartTimer, onStopTimer }) {
+function TaskList({
+  todos = [],
+  onDeleted,
+  onToggleActiveCount,
+  onEditTask,
+  onStartTimer,
+  onStopTimer,
+}) {
   return (
     <ul className="todo-list">
       {todos.map((task) => (
@@ -15,8 +22,8 @@ function TaskList({ todos = [], onDeleted, onToggleActiveCount, onEditTask, onSt
           onDeletedItem={() => onDeleted(task.id)}
           onToggleActiveCount={onToggleActiveCount}
           onEditTask={onEditTask}
-          taimerMinut={task.taimerMinut}
-          taimerSecond={task.taimerSecond}
+          timerMinut={task.timerMinut}
+          timerSecond={task.timerSecond}
           onStartTimer={() => onStartTimer(task.id)}
           onStopTimer={() => onStopTimer(task.id)}
         />
@@ -36,6 +43,8 @@ TaskList.propTypes = {
   onDeleted: PropTypes.func.isRequired,
   onToggleActiveCount: PropTypes.func.isRequired,
   onEditTask: PropTypes.func.isRequired,
+  onStartTimer: PropTypes.func.isRequired,
+  onStopTimer: PropTypes.func.isRequired,
 };
 
 export default TaskList;

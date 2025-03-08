@@ -6,8 +6,8 @@ export default class NewTaskForm extends Component {
     super(props);
     this.state = {
       label: '',
-      taimerMinut: 0,
-      taimerSecond: 0,
+      timerMinut: 0,
+      timerSecond: 0,
     };
   }
 
@@ -19,25 +19,25 @@ export default class NewTaskForm extends Component {
 
   onMinutChange = (e) => {
     this.setState({
-      taimerMinut: e.target.value,
+      timerMinut: e.target.value,
     });
   };
 
   onSecondChange = (e) => {
     this.setState({
-      taimerSecond: e.target.value,
+      timerSecond: e.target.value,
     });
   };
 
   onSubmit = (e) => {
     e.preventDefault();
     const { onAdd } = this.props;
-    const { label, taimerMinut, taimerSecond } = this.state;
-    onAdd(label, taimerMinut, taimerSecond);
+    const { label, timerMinut, timerSecond } = this.state;
+    onAdd(label, timerMinut, timerSecond);
     this.setState({
       label: '',
-      taimerMinut: 0,
-      taimerSecond: 0,
+      timerMinut: 0,
+      timerSecond: 0,
     });
   };
 
@@ -49,13 +49,14 @@ export default class NewTaskForm extends Component {
 
   // УДАЛЕНИЕ и ВОЗВРАЩЕНИЕ 0 ПРИ КЛИКЕ НА MIN и SEC
   handleBlur = (field) => {
-    if (this.state[field] === '') {
+    const { [field]: value } = this.state;
+    if (value === '') {
       this.setState({ [field]: 0 });
     }
   };
 
   render() {
-    const { label, taimerMinut, taimerSecond } = this.state;
+    const { label, timerMinut, timerSecond } = this.state;
     return (
       <form className="new-todo-form" onSubmit={this.onSubmit}>
         <input
@@ -71,20 +72,20 @@ export default class NewTaskForm extends Component {
           className="new-todo-form__timer"
           placeholder="Min"
           onKeyDown={this.onKeyDown}
-          value={taimerMinut}
+          value={timerMinut}
           onChange={this.onMinutChange}
-          onBlur={() => this.handleBlur('taimerMinut')}
-          onFocus={() => this.setState({taimerMinut: ''})}
+          onBlur={() => this.handleBlur('timerMinut')}
+          onFocus={() => this.setState({ timerMinut: '' })}
         />
         <input
           type="number"
           className="new-todo-form__timer"
           placeholder="Sec"
           onKeyDown={this.onKeyDown}
-          value={taimerSecond}
+          value={timerSecond}
           onChange={this.onSecondChange}
-          onBlur={() => this.handleBlur('taimerSecond')}
-          onFocus={() => this.setState({taimerSecond: ''})}
+          onBlur={() => this.handleBlur('timerSecond')}
+          onFocus={() => this.setState({ timerSecond: '' })}
         />
       </form>
     );

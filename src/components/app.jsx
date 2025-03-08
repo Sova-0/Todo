@@ -19,8 +19,8 @@ export default class App extends Component {
   }
 
   // ДОБАВЛЕНИЕ ЭЛЕМЕНТА
-  addItem = (text, taimerMinut, taimerSecond) => {
-    const newItem = this.createItem(text, taimerMinut, taimerSecond);
+  addItem = (text, timerMinut, timerSecond) => {
+    const newItem = this.createItem(text, timerMinut, timerSecond);
     this.setState(({ todoData }) => {
       const newArr = [...todoData, newItem];
       return {
@@ -106,21 +106,21 @@ export default class App extends Component {
     this.setState(({ todoData }) => {
       const updateData = todoData.map((task) => {
         if (task.id === id) {
-          if (task.taimerMinut === 0 && task.taimerSecond === 0) {
+          if (task.timerMinut === 0 && task.timerSecond === 0) {
             clearInterval(task.intervalId);
             return { ...task, taimerIsRunning: false, intervalId: null };
           }
-          if (task.taimerSecond === 0) {
+          if (task.timerSecond === 0) {
             return {
               ...task,
-              taimerMinut: task.taimerMinut - 1,
-              taimerSecond: 59,
+              timerMinut: task.timerMinut - 1,
+              timerSecond: 59,
             };
           }
-          if (task.taimerSecond > 0) {
+          if (task.timerSecond > 0) {
             return {
               ...task,
-              taimerSecond: task.taimerSecond - 1,
+              timerSecond: task.timerSecond - 1,
             };
           }
         }
@@ -153,7 +153,7 @@ export default class App extends Component {
   };
 
   // СОЗДАНИЕ ЭЛЕМЕНТА
-  createItem(description, taimerMinut, taimerSecond) {
+  createItem(description, timerMinut, timerSecond) {
     this.countId += 1;
     return {
       id: this.countId,
@@ -161,8 +161,8 @@ export default class App extends Component {
       description,
       done: false,
       createdAt: new Date(),
-      taimerMinut,
-      taimerSecond,
+      timerMinut,
+      timerSecond,
       taimerIsRunning: false,
       intervalId: null,
     };
