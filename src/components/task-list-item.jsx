@@ -51,7 +51,17 @@ export default class Task extends React.Component {
   };
 
   render() {
-    const { done, description, createdAt, onDeletedItem, id } = this.props;
+    const {
+      done,
+      description,
+      createdAt,
+      onDeletedItem,
+      id,
+      taimerMinut,
+      taimerSecond,
+      onStopTimer,
+      onStartTimer,
+    } = this.props;
     const { isEditing, editText } = this.state;
     return (
       <li className={`${done ? 'completed' : ''}${isEditing ? 'editing' : ''}`}>
@@ -66,7 +76,7 @@ export default class Task extends React.Component {
           {!isEditing ? (
             <label htmlFor={`task-${id}`}>
               <span
-                className="description"
+                className="title"
                 onClick={this.onToogleCompleted}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -78,7 +88,12 @@ export default class Task extends React.Component {
               >
                 {description}
               </span>
-              <span className="created">
+              <span className="description">
+                <button className="icon icon-play" onClick={onStartTimer}></button>
+                <button className="icon icon-pause" onClick={onStopTimer}></button>
+                {taimerMinut}:{taimerSecond}
+              </span>
+              <span className="created description">
                 {`created ${formatDistanceToNow(createdAt, {
                   addSuffix: true,
                 })} ago`}
